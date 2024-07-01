@@ -113,8 +113,12 @@ local chatmessagemade = false
 local luigicooldown = false
 local waluigicooldown = false
 
+local function onhudrender()
+    djui_hud_print_text("TYPE /stats AND /improvements",250,35, 3)
+end
+
 local function statscommand()
-    djui_chat_message_create("Mario: None. - Luigi: Higher jump, lower speed. Triple jump is twirl! - Toad: Higher speed, lower jump. Wario: Press the punch button mid-air to hover! One health only. - Waluigi: Takes less damage, lower jump.")
+    djui_chat_message_create("Mario: If you punch while ground pounding, you dive. - Luigi: Higher jump, lower speed. Triple jump is twirl! - Toad: Higher speed, lower jump. Wario: Press the punch button mid-air to hover! One health only. - Waluigi: Takes less damage, lower jump.")
 end
 local function improvementcommand()
     djui_chat_message_create("-Hold the punch button during a twirl to descend faster. -No delay back to moving after landing from a twirl.")
@@ -143,6 +147,16 @@ local function mario_update(m)
     end
 
     -- CHARACTER SPECIFIC
+
+    -- MARIO
+    if get_character(localmario).type == 0 then -- CHECK IF MARIO
+        if localmario.action == ACT_GROUND_POUND and (m.controller.buttonPressed & B_BUTTON) ~= 0 then
+            set_mario_action(localmario,ACT_DIVE,0)
+            mario_set_forward_vel(localmario, 56)
+            localmario.vel.y = 7
+        end
+    end
+
     -- LUIGI
     if get_character(localmario).type == 1 then -- CHECK IF LUIGI
         if localmario.forwardVel > 27 and localmario.action == ACT_WALKING then
@@ -208,3 +222,4 @@ end
 hook_event(HOOK_MARIO_UPDATE, mario_update)
 hook_chat_command('stats', "show stats", statscommand)
 hook_chat_command('improvements', "show stats", improvementcommand)
+hook_event(HOOK_ON_HUD_RENDER, onhudrender)
