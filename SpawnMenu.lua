@@ -7,6 +7,7 @@ local x = 30
 local y = 850
 local x2 = 30
 local y2 = 650
+local y3 = 550
 
 local spawningactive = "inactive"
 local itemindexint = 1
@@ -14,7 +15,8 @@ local itemname = "please select item"
 
 local function onhudrender()
     djui_hud_set_font(FONT_HUD)
-    djui_hud_print_text(spawningactive, x, y, 5)
+    djui_hud_print_text("DPAD LEFT/RIGHT CYCLE. DPAD DOWN SPAWN.", x, y3, 1.5)
+    djui_hud_print_text(spawningactive .. " PRESS L.", x, y, 5)
     djui_hud_print_text(itemname, x2, y2, 5)
 end
 
@@ -28,7 +30,7 @@ local function updated(m)
     end
 
     if (m.controller.buttonPressed & R_JPAD) ~= 0 then
-        if spawningactive == "active" and itemindexint < 8 then
+        if spawningactive == "active" and itemindexint < 13 then
             itemindexint = itemindexint + 1
         end
     end
@@ -65,6 +67,21 @@ local function updated(m)
             if itemindexint == 8 then
                 spawn_sync_object(id_bhvWhompKingBoss, E_MODEL_WHOMP, m.pos.x, m.pos.y + 50, m.pos.z + 350, function(obj)end)
             end
+            if itemindexint == 9 then
+                spawn_sync_object(id_bhvDoor, E_MODEL_CASTLE_DOOR_0_STARS, m.pos.x, m.pos.y, m.pos.z, function(obj)end)
+            end
+            if itemindexint == 10 then
+                spawn_sync_object(id_bhvBoo, E_MODEL_BOO, m.pos.x, m.pos.y, m.pos.z + 350, function(obj)end)
+            end
+            if itemindexint == 11 then
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x, m.pos.y, m.pos.z + 350, function(obj)end)
+            end
+            if itemindexint == 12 then
+                spawn_sync_object(id_bhvHomingAmp, E_MODEL_AMP, m.pos.x, m.pos.y, m.pos.z + 350, function(obj)end)
+            end
+            if itemindexint == 13 then
+                spawn_sync_object(id_bhvTTCRotatingSolid, E_MODEL_TTC_ROTATING_CUBE, m.pos.x, m.pos.y - 150, m.pos.z, function(obj)end)
+            end
         end
     end
 
@@ -92,6 +109,22 @@ local function updated(m)
     if itemindexint == 8 then
         itemname = "King Whomp"
     end
+    if itemindexint == 9 then
+        itemname = "Door"
+    end
+    if itemindexint == 10 then
+        itemname = "Boo"
+    end
+    if itemindexint == 11 then
+        itemname = "Chair"
+    end
+    if itemindexint == 12 then
+        itemname = "Amp"
+    end
+    if itemindexint == 13 then
+        itemname = "Rotating Thingamabob"
+    end
+
 
 end
 
