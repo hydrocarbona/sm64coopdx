@@ -72,6 +72,16 @@ BonkActions = {
     ACT_GROUND_BONK,
     ACT_SOFT_BONK
 }
+
+local function checkifbonk()
+    for _, action in ipairs(HurtActions) do
+        if action == localmario.action then
+            return true
+        end
+    end
+    return false
+end
+
 local function checkifstationary()
     for _, action in ipairs(StationaryActions) do
         if action == localmario.action then
@@ -154,6 +164,9 @@ local function mario_update(m)
             set_mario_action(localmario,ACT_DIVE,0)
             mario_set_forward_vel(localmario, 56)
             localmario.vel.y = 7
+        end
+        if checkifbonk() == true then
+            set_mario_action(localmario,ACT_FREEFALL,0)
         end
     end
 
