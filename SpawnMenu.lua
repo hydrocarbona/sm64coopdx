@@ -30,7 +30,7 @@ local function updated(m)
     end
 
     if (m.controller.buttonPressed & R_JPAD) ~= 0 then
-        if spawningactive == "active" and itemindexint < 13 then
+        if spawningactive == "active" and itemindexint < 14 then
             itemindexint = itemindexint + 1
         end
     end
@@ -82,6 +82,15 @@ local function updated(m)
             if itemindexint == 13 then
                 spawn_sync_object(id_bhvTTCRotatingSolid, E_MODEL_TTC_ROTATING_CUBE, m.pos.x, m.pos.y - 150, m.pos.z, function(obj)end)
             end
+            if itemindexint == 14 then
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 100, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 200, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 300, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 400, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 500, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 600, m.pos.y, m.pos.z + 350, function(obj)end)
+                spawn_sync_object(id_bhvHauntedChair, E_MODEL_HAUNTED_CHAIR, m.pos.x + 700, m.pos.y, m.pos.z + 350, function(obj)end)
+            end
         end
     end
 
@@ -123,6 +132,9 @@ local function updated(m)
     end
     if itemindexint == 13 then
         itemname = "Rotating Thingamabob"
+    end
+    if itemindexint == 14 then
+        itemname = "Chair (many)"
     end
 
 
